@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SysUserDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SysUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_remark" jdbcType="VARCHAR" property="userRemark" />
+    <result column="user_date" jdbcType="DATE" property="userDate" />
+    <result column="user_last_ip" jdbcType="VARCHAR" property="userLastIp" />
+    <result column="user_last_time" jdbcType="VARCHAR" property="userLastTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_id, emp_id, user_name, user_pwd, user_remark, user_date, user_last_ip, user_last_time
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.SysUser" useGeneratedKeys="true">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userRemark != null">
+        user_remark,
+      </if>
+      <if test="userDate != null">
+        user_date,
+      </if>
+      <if test="userLastIp != null">
+        user_last_ip,
+      </if>
+      <if test="userLastTime != null">
+        user_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userRemark != null">
+        #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userDate != null">
+        #{userDate,jdbcType=DATE},
+      </if>
+      <if test="userLastIp != null">
+        #{userLastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLastTime != null">
+        #{userLastTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SysUser">
+    update sys_user
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userRemark != null">
+        user_remark = #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userDate != null">
+        user_date = #{userDate,jdbcType=DATE},
+      </if>
+      <if test="userLastIp != null">
+        user_last_ip = #{userLastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLastTime != null">
+        user_last_time = #{userLastTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="roleId != null">
+         and role_id = #{roleId,jdbcType=BIGINT}
+      </if>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="userName != null and userName != ''">
+         and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userPwd != null and userPwd != ''">
+         and user_pwd = #{userPwd,jdbcType=VARCHAR}
+      </if>
+      <if test="userRemark != null and userRemark != ''">
+         and user_remark = #{userRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="userDate != null">
+         and user_date = #{userDate,jdbcType=DATE}
+      </if>
+      <if test="userLastIp != null and userLastIp != ''">
+         and user_last_ip = #{userLastIp,jdbcType=VARCHAR}
+      </if>
+      <if test="userLastTime != null and userLastTime != ''">
+         and user_last_time = #{userLastTime,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SysUser" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_user
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from sys_user
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_user
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from sys_user
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

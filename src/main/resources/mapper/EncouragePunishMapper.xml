@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.EncouragePunishDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.EncouragePunish">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="ep_type" jdbcType="INTEGER" property="epType" />
+    <result column="ep_topic" jdbcType="VARCHAR" property="epTopic" />
+    <result column="ep_money" jdbcType="REAL" property="epMoney" />
+    <result column="ep_other" jdbcType="VARCHAR" property="epOther" />
+    <result column="ep_release_date" jdbcType="DATE" property="epReleaseDate" />
+    <result column="ep_release_person" jdbcType="VARCHAR" property="epReleasePerson" />
+    <result column="ep_reason" jdbcType="VARCHAR" property="epReason" />
+    <result column="ep_remark" jdbcType="VARCHAR" property="epRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emp_id, ep_type, ep_topic, ep_money, ep_other, ep_release_date, ep_release_person, 
+    ep_reason, ep_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from encourage_punish
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from encourage_punish
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.EncouragePunish" useGeneratedKeys="true">
+    insert into encourage_punish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="epType != null">
+        ep_type,
+      </if>
+      <if test="epTopic != null">
+        ep_topic,
+      </if>
+      <if test="epMoney != null">
+        ep_money,
+      </if>
+      <if test="epOther != null">
+        ep_other,
+      </if>
+      <if test="epReleaseDate != null">
+        ep_release_date,
+      </if>
+      <if test="epReleasePerson != null">
+        ep_release_person,
+      </if>
+      <if test="epReason != null">
+        ep_reason,
+      </if>
+      <if test="epRemark != null">
+        ep_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="epType != null">
+        #{epType,jdbcType=INTEGER},
+      </if>
+      <if test="epTopic != null">
+        #{epTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="epMoney != null">
+        #{epMoney,jdbcType=REAL},
+      </if>
+      <if test="epOther != null">
+        #{epOther,jdbcType=VARCHAR},
+      </if>
+      <if test="epReleaseDate != null">
+        #{epReleaseDate,jdbcType=DATE},
+      </if>
+      <if test="epReleasePerson != null">
+        #{epReleasePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="epReason != null">
+        #{epReason,jdbcType=VARCHAR},
+      </if>
+      <if test="epRemark != null">
+        #{epRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.EncouragePunish">
+    update encourage_punish
+    <set>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="epType != null">
+        ep_type = #{epType,jdbcType=INTEGER},
+      </if>
+      <if test="epTopic != null">
+        ep_topic = #{epTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="epMoney != null">
+        ep_money = #{epMoney,jdbcType=REAL},
+      </if>
+      <if test="epOther != null">
+        ep_other = #{epOther,jdbcType=VARCHAR},
+      </if>
+      <if test="epReleaseDate != null">
+        ep_release_date = #{epReleaseDate,jdbcType=DATE},
+      </if>
+      <if test="epReleasePerson != null">
+        ep_release_person = #{epReleasePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="epReason != null">
+        ep_reason = #{epReason,jdbcType=VARCHAR},
+      </if>
+      <if test="epRemark != null">
+        ep_remark = #{epRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="epType != null">
+         and ep_type = #{epType,jdbcType=INTEGER}
+      </if>
+      <if test="epTopic != null and epTopic != ''">
+         and ep_topic = #{epTopic,jdbcType=VARCHAR}
+      </if>
+      <if test="epMoney != null">
+         and ep_money = #{epMoney,jdbcType=REAL}
+      </if>
+      <if test="epOther != null and epOther != ''">
+         and ep_other = #{epOther,jdbcType=VARCHAR}
+      </if>
+      <if test="epReleaseDate != null">
+         and ep_release_date = #{epReleaseDate,jdbcType=DATE}
+      </if>
+      <if test="epReleasePerson != null and epReleasePerson != ''">
+         and ep_release_person = #{epReleasePerson,jdbcType=VARCHAR}
+      </if>
+      <if test="epReason != null and epReason != ''">
+         and ep_reason = #{epReason,jdbcType=VARCHAR}
+      </if>
+      <if test="epRemark != null and epRemark != ''">
+         and ep_remark = #{epRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.EncouragePunish" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from encourage_punish
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from encourage_punish
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from encourage_punish
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from encourage_punish
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

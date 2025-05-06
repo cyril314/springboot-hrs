@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SalaryDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.Salary">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="sal_basic" jdbcType="REAL" property="salBasic" />
+    <result column="sal_job" jdbcType="REAL" property="salJob" />
+    <result column="sal_normal" jdbcType="REAL" property="salNormal" />
+    <result column="sal_all" jdbcType="REAL" property="salAll" />
+    <result column="sal_absenteeism" jdbcType="REAL" property="salAbsenteeism" />
+    <result column="sal_absenteeism_money" jdbcType="REAL" property="salAbsenteeismMoney" />
+    <result column="sal_endowmentint" jdbcType="REAL" property="salEndowmentint" />
+    <result column="sal_hospitalizationint" jdbcType="REAL" property="salHospitalizationint" />
+    <result column="sal_unemploymentint" jdbcType="REAL" property="salUnemploymentint" />
+    <result column="sal_eateryfloat" jdbcType="REAL" property="salEateryfloat" />
+    <result column="sal_trafficfloat" jdbcType="REAL" property="salTrafficfloat" />
+    <result column="sal_telephone" jdbcType="REAL" property="salTelephone" />
+    <result column="sal_allowance" jdbcType="REAL" property="salAllowance" />
+    <result column="sal_revenue" jdbcType="REAL" property="salRevenue" />
+    <result column="sal_money" jdbcType="REAL" property="salMoney" />
+    <result column="sal_year" jdbcType="VARCHAR" property="salYear" />
+    <result column="sal_release_person" jdbcType="VARCHAR" property="salReleasePerson" />
+    <result column="sal_release_date" jdbcType="DATE" property="salReleaseDate" />
+    <result column="sal_check_person" jdbcType="VARCHAR" property="salCheckPerson" />
+    <result column="sal_check_date" jdbcType="DATE" property="salCheckDate" />
+    <result column="sal_month" jdbcType="INTEGER" property="salMonth" />
+    <result column="sal_remark" jdbcType="VARCHAR" property="salRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emp_id, sal_basic, sal_job, sal_normal, sal_all, sal_absenteeism, sal_absenteeism_money, 
+    sal_endowmentint, sal_hospitalizationint, sal_unemploymentint, sal_eateryfloat, sal_trafficfloat, 
+    sal_telephone, sal_allowance, sal_revenue, sal_money, sal_year, sal_release_person, 
+    sal_release_date, sal_check_person, sal_check_date, sal_month, sal_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from salary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.Salary" useGeneratedKeys="true">
+    insert into salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="salBasic != null">
+        sal_basic,
+      </if>
+      <if test="salJob != null">
+        sal_job,
+      </if>
+      <if test="salNormal != null">
+        sal_normal,
+      </if>
+      <if test="salAll != null">
+        sal_all,
+      </if>
+      <if test="salAbsenteeism != null">
+        sal_absenteeism,
+      </if>
+      <if test="salAbsenteeismMoney != null">
+        sal_absenteeism_money,
+      </if>
+      <if test="salEndowmentint != null">
+        sal_endowmentint,
+      </if>
+      <if test="salHospitalizationint != null">
+        sal_hospitalizationint,
+      </if>
+      <if test="salUnemploymentint != null">
+        sal_unemploymentint,
+      </if>
+      <if test="salEateryfloat != null">
+        sal_eateryfloat,
+      </if>
+      <if test="salTrafficfloat != null">
+        sal_trafficfloat,
+      </if>
+      <if test="salTelephone != null">
+        sal_telephone,
+      </if>
+      <if test="salAllowance != null">
+        sal_allowance,
+      </if>
+      <if test="salRevenue != null">
+        sal_revenue,
+      </if>
+      <if test="salMoney != null">
+        sal_money,
+      </if>
+      <if test="salYear != null">
+        sal_year,
+      </if>
+      <if test="salReleasePerson != null">
+        sal_release_person,
+      </if>
+      <if test="salReleaseDate != null">
+        sal_release_date,
+      </if>
+      <if test="salCheckPerson != null">
+        sal_check_person,
+      </if>
+      <if test="salCheckDate != null">
+        sal_check_date,
+      </if>
+      <if test="salMonth != null">
+        sal_month,
+      </if>
+      <if test="salRemark != null">
+        sal_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="salBasic != null">
+        #{salBasic,jdbcType=REAL},
+      </if>
+      <if test="salJob != null">
+        #{salJob,jdbcType=REAL},
+      </if>
+      <if test="salNormal != null">
+        #{salNormal,jdbcType=REAL},
+      </if>
+      <if test="salAll != null">
+        #{salAll,jdbcType=REAL},
+      </if>
+      <if test="salAbsenteeism != null">
+        #{salAbsenteeism,jdbcType=REAL},
+      </if>
+      <if test="salAbsenteeismMoney != null">
+        #{salAbsenteeismMoney,jdbcType=REAL},
+      </if>
+      <if test="salEndowmentint != null">
+        #{salEndowmentint,jdbcType=REAL},
+      </if>
+      <if test="salHospitalizationint != null">
+        #{salHospitalizationint,jdbcType=REAL},
+      </if>
+      <if test="salUnemploymentint != null">
+        #{salUnemploymentint,jdbcType=REAL},
+      </if>
+      <if test="salEateryfloat != null">
+        #{salEateryfloat,jdbcType=REAL},
+      </if>
+      <if test="salTrafficfloat != null">
+        #{salTrafficfloat,jdbcType=REAL},
+      </if>
+      <if test="salTelephone != null">
+        #{salTelephone,jdbcType=REAL},
+      </if>
+      <if test="salAllowance != null">
+        #{salAllowance,jdbcType=REAL},
+      </if>
+      <if test="salRevenue != null">
+        #{salRevenue,jdbcType=REAL},
+      </if>
+      <if test="salMoney != null">
+        #{salMoney,jdbcType=REAL},
+      </if>
+      <if test="salYear != null">
+        #{salYear,jdbcType=VARCHAR},
+      </if>
+      <if test="salReleasePerson != null">
+        #{salReleasePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="salReleaseDate != null">
+        #{salReleaseDate,jdbcType=DATE},
+      </if>
+      <if test="salCheckPerson != null">
+        #{salCheckPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="salCheckDate != null">
+        #{salCheckDate,jdbcType=DATE},
+      </if>
+      <if test="salMonth != null">
+        #{salMonth,jdbcType=INTEGER},
+      </if>
+      <if test="salRemark != null">
+        #{salRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.Salary">
+    update salary
+    <set>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="salBasic != null">
+        sal_basic = #{salBasic,jdbcType=REAL},
+      </if>
+      <if test="salJob != null">
+        sal_job = #{salJob,jdbcType=REAL},
+      </if>
+      <if test="salNormal != null">
+        sal_normal = #{salNormal,jdbcType=REAL},
+      </if>
+      <if test="salAll != null">
+        sal_all = #{salAll,jdbcType=REAL},
+      </if>
+      <if test="salAbsenteeism != null">
+        sal_absenteeism = #{salAbsenteeism,jdbcType=REAL},
+      </if>
+      <if test="salAbsenteeismMoney != null">
+        sal_absenteeism_money = #{salAbsenteeismMoney,jdbcType=REAL},
+      </if>
+      <if test="salEndowmentint != null">
+        sal_endowmentint = #{salEndowmentint,jdbcType=REAL},
+      </if>
+      <if test="salHospitalizationint != null">
+        sal_hospitalizationint = #{salHospitalizationint,jdbcType=REAL},
+      </if>
+      <if test="salUnemploymentint != null">
+        sal_unemploymentint = #{salUnemploymentint,jdbcType=REAL},
+      </if>
+      <if test="salEateryfloat != null">
+        sal_eateryfloat = #{salEateryfloat,jdbcType=REAL},
+      </if>
+      <if test="salTrafficfloat != null">
+        sal_trafficfloat = #{salTrafficfloat,jdbcType=REAL},
+      </if>
+      <if test="salTelephone != null">
+        sal_telephone = #{salTelephone,jdbcType=REAL},
+      </if>
+      <if test="salAllowance != null">
+        sal_allowance = #{salAllowance,jdbcType=REAL},
+      </if>
+      <if test="salRevenue != null">
+        sal_revenue = #{salRevenue,jdbcType=REAL},
+      </if>
+      <if test="salMoney != null">
+        sal_money = #{salMoney,jdbcType=REAL},
+      </if>
+      <if test="salYear != null">
+        sal_year = #{salYear,jdbcType=VARCHAR},
+      </if>
+      <if test="salReleasePerson != null">
+        sal_release_person = #{salReleasePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="salReleaseDate != null">
+        sal_release_date = #{salReleaseDate,jdbcType=DATE},
+      </if>
+      <if test="salCheckPerson != null">
+        sal_check_person = #{salCheckPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="salCheckDate != null">
+        sal_check_date = #{salCheckDate,jdbcType=DATE},
+      </if>
+      <if test="salMonth != null">
+        sal_month = #{salMonth,jdbcType=INTEGER},
+      </if>
+      <if test="salRemark != null">
+        sal_remark = #{salRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="salBasic != null">
+         and sal_basic = #{salBasic,jdbcType=REAL}
+      </if>
+      <if test="salJob != null">
+         and sal_job = #{salJob,jdbcType=REAL}
+      </if>
+      <if test="salNormal != null">
+         and sal_normal = #{salNormal,jdbcType=REAL}
+      </if>
+      <if test="salAll != null">
+         and sal_all = #{salAll,jdbcType=REAL}
+      </if>
+      <if test="salAbsenteeism != null">
+         and sal_absenteeism = #{salAbsenteeism,jdbcType=REAL}
+      </if>
+      <if test="salAbsenteeismMoney != null">
+         and sal_absenteeism_money = #{salAbsenteeismMoney,jdbcType=REAL}
+      </if>
+      <if test="salEndowmentint != null">
+         and sal_endowmentint = #{salEndowmentint,jdbcType=REAL}
+      </if>
+      <if test="salHospitalizationint != null">
+         and sal_hospitalizationint = #{salHospitalizationint,jdbcType=REAL}
+      </if>
+      <if test="salUnemploymentint != null">
+         and sal_unemploymentint = #{salUnemploymentint,jdbcType=REAL}
+      </if>
+      <if test="salEateryfloat != null">
+         and sal_eateryfloat = #{salEateryfloat,jdbcType=REAL}
+      </if>
+      <if test="salTrafficfloat != null">
+         and sal_trafficfloat = #{salTrafficfloat,jdbcType=REAL}
+      </if>
+      <if test="salTelephone != null">
+         and sal_telephone = #{salTelephone,jdbcType=REAL}
+      </if>
+      <if test="salAllowance != null">
+         and sal_allowance = #{salAllowance,jdbcType=REAL}
+      </if>
+      <if test="salRevenue != null">
+         and sal_revenue = #{salRevenue,jdbcType=REAL}
+      </if>
+      <if test="salMoney != null">
+         and sal_money = #{salMoney,jdbcType=REAL}
+      </if>
+      <if test="salYear != null and salYear != ''">
+         and sal_year = #{salYear,jdbcType=VARCHAR}
+      </if>
+      <if test="salReleasePerson != null and salReleasePerson != ''">
+         and sal_release_person = #{salReleasePerson,jdbcType=VARCHAR}
+      </if>
+      <if test="salReleaseDate != null">
+         and sal_release_date = #{salReleaseDate,jdbcType=DATE}
+      </if>
+      <if test="salCheckPerson != null and salCheckPerson != ''">
+         and sal_check_person = #{salCheckPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="salCheckDate != null">
+         and sal_check_date = #{salCheckDate,jdbcType=DATE}
+      </if>
+      <if test="salMonth != null">
+         and sal_month = #{salMonth,jdbcType=INTEGER}
+      </if>
+      <if test="salRemark != null and salRemark != ''">
+         and sal_remark = #{salRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.Salary" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from salary
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from salary
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from salary
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from salary
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

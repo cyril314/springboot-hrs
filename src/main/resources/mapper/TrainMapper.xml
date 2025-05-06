@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.TrainDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.Train">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="train_title" jdbcType="VARCHAR" property="trainTitle" />
+    <result column="train_content" jdbcType="VARCHAR" property="trainContent" />
+    <result column="train_date" jdbcType="DATE" property="trainDate" />
+    <result column="train_place" jdbcType="VARCHAR" property="trainPlace" />
+    <result column="train_person" jdbcType="VARCHAR" property="trainPerson" />
+    <result column="train_add_person" jdbcType="VARCHAR" property="trainAddPerson" />
+    <result column="train_add_date" jdbcType="DATE" property="trainAddDate" />
+    <result column="train_remark" jdbcType="VARCHAR" property="trainRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, train_title, train_content, train_date, train_place, train_person, train_add_person, 
+    train_add_date, train_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from train
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from train
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.Train" useGeneratedKeys="true">
+    insert into train
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="trainTitle != null">
+        train_title,
+      </if>
+      <if test="trainContent != null">
+        train_content,
+      </if>
+      <if test="trainDate != null">
+        train_date,
+      </if>
+      <if test="trainPlace != null">
+        train_place,
+      </if>
+      <if test="trainPerson != null">
+        train_person,
+      </if>
+      <if test="trainAddPerson != null">
+        train_add_person,
+      </if>
+      <if test="trainAddDate != null">
+        train_add_date,
+      </if>
+      <if test="trainRemark != null">
+        train_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="trainTitle != null">
+        #{trainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="trainContent != null">
+        #{trainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="trainDate != null">
+        #{trainDate,jdbcType=DATE},
+      </if>
+      <if test="trainPlace != null">
+        #{trainPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="trainPerson != null">
+        #{trainPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trainAddPerson != null">
+        #{trainAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trainAddDate != null">
+        #{trainAddDate,jdbcType=DATE},
+      </if>
+      <if test="trainRemark != null">
+        #{trainRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.Train">
+    update train
+    <set>
+      <if test="trainTitle != null">
+        train_title = #{trainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="trainContent != null">
+        train_content = #{trainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="trainDate != null">
+        train_date = #{trainDate,jdbcType=DATE},
+      </if>
+      <if test="trainPlace != null">
+        train_place = #{trainPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="trainPerson != null">
+        train_person = #{trainPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trainAddPerson != null">
+        train_add_person = #{trainAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trainAddDate != null">
+        train_add_date = #{trainAddDate,jdbcType=DATE},
+      </if>
+      <if test="trainRemark != null">
+        train_remark = #{trainRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="trainTitle != null and trainTitle != ''">
+         and train_title = #{trainTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="trainContent != null and trainContent != ''">
+         and train_content = #{trainContent,jdbcType=VARCHAR}
+      </if>
+      <if test="trainDate != null">
+         and train_date = #{trainDate,jdbcType=DATE}
+      </if>
+      <if test="trainPlace != null and trainPlace != ''">
+         and train_place = #{trainPlace,jdbcType=VARCHAR}
+      </if>
+      <if test="trainPerson != null and trainPerson != ''">
+         and train_person = #{trainPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="trainAddPerson != null and trainAddPerson != ''">
+         and train_add_person = #{trainAddPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="trainAddDate != null">
+         and train_add_date = #{trainAddDate,jdbcType=DATE}
+      </if>
+      <if test="trainRemark != null and trainRemark != ''">
+         and train_remark = #{trainRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.Train" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from train
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from train
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from train
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from train
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

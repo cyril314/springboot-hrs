@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.RecruitmentDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.Recruitment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="rec_title" jdbcType="VARCHAR" property="recTitle" />
+    <result column="rec_content" jdbcType="VARCHAR" property="recContent" />
+    <result column="rec_start" jdbcType="DATE" property="recStart" />
+    <result column="rec_end" jdbcType="DATE" property="recEnd" />
+    <result column="rec_person" jdbcType="VARCHAR" property="recPerson" />
+    <result column="rec_date" jdbcType="DATE" property="recDate" />
+    <result column="rec_job" jdbcType="VARCHAR" property="recJob" />
+    <result column="rec_num" jdbcType="INTEGER" property="recNum" />
+    <result column="rec_remark" jdbcType="VARCHAR" property="recRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rec_title, rec_content, rec_start, rec_end, rec_person, rec_date, rec_job, rec_num, 
+    rec_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recruitment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from recruitment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.Recruitment" useGeneratedKeys="true">
+    insert into recruitment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recTitle != null">
+        rec_title,
+      </if>
+      <if test="recContent != null">
+        rec_content,
+      </if>
+      <if test="recStart != null">
+        rec_start,
+      </if>
+      <if test="recEnd != null">
+        rec_end,
+      </if>
+      <if test="recPerson != null">
+        rec_person,
+      </if>
+      <if test="recDate != null">
+        rec_date,
+      </if>
+      <if test="recJob != null">
+        rec_job,
+      </if>
+      <if test="recNum != null">
+        rec_num,
+      </if>
+      <if test="recRemark != null">
+        rec_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recTitle != null">
+        #{recTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recContent != null">
+        #{recContent,jdbcType=VARCHAR},
+      </if>
+      <if test="recStart != null">
+        #{recStart,jdbcType=DATE},
+      </if>
+      <if test="recEnd != null">
+        #{recEnd,jdbcType=DATE},
+      </if>
+      <if test="recPerson != null">
+        #{recPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="recDate != null">
+        #{recDate,jdbcType=DATE},
+      </if>
+      <if test="recJob != null">
+        #{recJob,jdbcType=VARCHAR},
+      </if>
+      <if test="recNum != null">
+        #{recNum,jdbcType=INTEGER},
+      </if>
+      <if test="recRemark != null">
+        #{recRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.Recruitment">
+    update recruitment
+    <set>
+      <if test="recTitle != null">
+        rec_title = #{recTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recContent != null">
+        rec_content = #{recContent,jdbcType=VARCHAR},
+      </if>
+      <if test="recStart != null">
+        rec_start = #{recStart,jdbcType=DATE},
+      </if>
+      <if test="recEnd != null">
+        rec_end = #{recEnd,jdbcType=DATE},
+      </if>
+      <if test="recPerson != null">
+        rec_person = #{recPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="recDate != null">
+        rec_date = #{recDate,jdbcType=DATE},
+      </if>
+      <if test="recJob != null">
+        rec_job = #{recJob,jdbcType=VARCHAR},
+      </if>
+      <if test="recNum != null">
+        rec_num = #{recNum,jdbcType=INTEGER},
+      </if>
+      <if test="recRemark != null">
+        rec_remark = #{recRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="recTitle != null and recTitle != ''">
+         and rec_title = #{recTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="recContent != null and recContent != ''">
+         and rec_content = #{recContent,jdbcType=VARCHAR}
+      </if>
+      <if test="recStart != null">
+         and rec_start = #{recStart,jdbcType=DATE}
+      </if>
+      <if test="recEnd != null">
+         and rec_end = #{recEnd,jdbcType=DATE}
+      </if>
+      <if test="recPerson != null and recPerson != ''">
+         and rec_person = #{recPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="recDate != null">
+         and rec_date = #{recDate,jdbcType=DATE}
+      </if>
+      <if test="recJob != null and recJob != ''">
+         and rec_job = #{recJob,jdbcType=VARCHAR}
+      </if>
+      <if test="recNum != null">
+         and rec_num = #{recNum,jdbcType=INTEGER}
+      </if>
+      <if test="recRemark != null and recRemark != ''">
+         and rec_remark = #{recRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.Recruitment" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from recruitment
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from recruitment
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from recruitment
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from recruitment
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

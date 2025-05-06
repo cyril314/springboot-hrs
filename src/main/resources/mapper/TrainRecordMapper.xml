@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.TrainRecordDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.TrainRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="train_id" jdbcType="BIGINT" property="trainId" />
+    <result column="tRecord_add_date" jdbcType="DATE" property="trecordAddDate" />
+    <result column="tRecord_add_person" jdbcType="VARCHAR" property="trecordAddPerson" />
+    <result column="tRecord_result" jdbcType="INTEGER" property="trecordResult" />
+    <result column="tRecord_remark" jdbcType="VARCHAR" property="trecordRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emp_id, train_id, tRecord_add_date, tRecord_add_person, tRecord_result, tRecord_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from train_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from train_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.TrainRecord" useGeneratedKeys="true">
+    insert into train_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="trainId != null">
+        train_id,
+      </if>
+      <if test="trecordAddDate != null">
+        tRecord_add_date,
+      </if>
+      <if test="trecordAddPerson != null">
+        tRecord_add_person,
+      </if>
+      <if test="trecordResult != null">
+        tRecord_result,
+      </if>
+      <if test="trecordRemark != null">
+        tRecord_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="trainId != null">
+        #{trainId,jdbcType=BIGINT},
+      </if>
+      <if test="trecordAddDate != null">
+        #{trecordAddDate,jdbcType=DATE},
+      </if>
+      <if test="trecordAddPerson != null">
+        #{trecordAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trecordResult != null">
+        #{trecordResult,jdbcType=INTEGER},
+      </if>
+      <if test="trecordRemark != null">
+        #{trecordRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.TrainRecord">
+    update train_record
+    <set>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="trainId != null">
+        train_id = #{trainId,jdbcType=BIGINT},
+      </if>
+      <if test="trecordAddDate != null">
+        tRecord_add_date = #{trecordAddDate,jdbcType=DATE},
+      </if>
+      <if test="trecordAddPerson != null">
+        tRecord_add_person = #{trecordAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="trecordResult != null">
+        tRecord_result = #{trecordResult,jdbcType=INTEGER},
+      </if>
+      <if test="trecordRemark != null">
+        tRecord_remark = #{trecordRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="trainId != null">
+         and train_id = #{trainId,jdbcType=BIGINT}
+      </if>
+      <if test="trecordAddDate != null">
+         and tRecord_add_date = #{trecordAddDate,jdbcType=DATE}
+      </if>
+      <if test="trecordAddPerson != null and trecordAddPerson != ''">
+         and tRecord_add_person = #{trecordAddPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="trecordResult != null">
+         and tRecord_result = #{trecordResult,jdbcType=INTEGER}
+      </if>
+      <if test="trecordRemark != null and trecordRemark != ''">
+         and tRecord_remark = #{trecordRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.TrainRecord" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from train_record
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from train_record
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from train_record
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from train_record
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

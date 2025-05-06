@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.EmployeeDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.Employee">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
+    <result column="emp_sex" jdbcType="INTEGER" property="empSex" />
+    <result column="emp_birth" jdbcType="DATE" property="empBirth" />
+    <result column="emp_address" jdbcType="VARCHAR" property="empAddress" />
+    <result column="emp_post" jdbcType="VARCHAR" property="empPost" />
+    <result column="emp_telephone" jdbcType="VARCHAR" property="empTelephone" />
+    <result column="emp_mobilephone" jdbcType="VARCHAR" property="empMobilephone" />
+    <result column="emp_qq" jdbcType="VARCHAR" property="empQq" />
+    <result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
+    <result column="emp_account" jdbcType="VARCHAR" property="empAccount" />
+    <result column="emp_idcard" jdbcType="VARCHAR" property="empIdcard" />
+    <result column="emp_photo" jdbcType="VARCHAR" property="empPhoto" />
+    <result column="emp_add_date" jdbcType="DATE" property="empAddDate" />
+    <result column="emp_add_person" jdbcType="VARCHAR" property="empAddPerson" />
+    <result column="emp_job" jdbcType="BIGINT" property="empJob" />
+    <result column="emp_bank" jdbcType="VARCHAR" property="empBank" />
+    <result column="emp_nationality" jdbcType="VARCHAR" property="empNationality" />
+    <result column="emp_origin" jdbcType="VARCHAR" property="empOrigin" />
+    <result column="emp_nation" jdbcType="VARCHAR" property="empNation" />
+    <result column="emp_school" jdbcType="VARCHAR" property="empSchool" />
+    <result column="emp_education" jdbcType="VARCHAR" property="empEducation" />
+    <result column="emp_profession" jdbcType="VARCHAR" property="empProfession" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dept_id, emp_name, emp_sex, emp_birth, emp_address, emp_post, emp_telephone, 
+    emp_mobilephone, emp_qq, emp_email, emp_account, emp_idcard, emp_photo, emp_add_date, 
+    emp_add_person, emp_job, emp_bank, emp_nationality, emp_origin, emp_nation, emp_school, 
+    emp_education, emp_profession
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from employee
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.Employee" useGeneratedKeys="true">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="empName != null">
+        emp_name,
+      </if>
+      <if test="empSex != null">
+        emp_sex,
+      </if>
+      <if test="empBirth != null">
+        emp_birth,
+      </if>
+      <if test="empAddress != null">
+        emp_address,
+      </if>
+      <if test="empPost != null">
+        emp_post,
+      </if>
+      <if test="empTelephone != null">
+        emp_telephone,
+      </if>
+      <if test="empMobilephone != null">
+        emp_mobilephone,
+      </if>
+      <if test="empQq != null">
+        emp_qq,
+      </if>
+      <if test="empEmail != null">
+        emp_email,
+      </if>
+      <if test="empAccount != null">
+        emp_account,
+      </if>
+      <if test="empIdcard != null">
+        emp_idcard,
+      </if>
+      <if test="empPhoto != null">
+        emp_photo,
+      </if>
+      <if test="empAddDate != null">
+        emp_add_date,
+      </if>
+      <if test="empAddPerson != null">
+        emp_add_person,
+      </if>
+      <if test="empJob != null">
+        emp_job,
+      </if>
+      <if test="empBank != null">
+        emp_bank,
+      </if>
+      <if test="empNationality != null">
+        emp_nationality,
+      </if>
+      <if test="empOrigin != null">
+        emp_origin,
+      </if>
+      <if test="empNation != null">
+        emp_nation,
+      </if>
+      <if test="empSchool != null">
+        emp_school,
+      </if>
+      <if test="empEducation != null">
+        emp_education,
+      </if>
+      <if test="empProfession != null">
+        emp_profession,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null">
+        #{empSex,jdbcType=INTEGER},
+      </if>
+      <if test="empBirth != null">
+        #{empBirth,jdbcType=DATE},
+      </if>
+      <if test="empAddress != null">
+        #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empPost != null">
+        #{empPost,jdbcType=VARCHAR},
+      </if>
+      <if test="empTelephone != null">
+        #{empTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="empMobilephone != null">
+        #{empMobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="empQq != null">
+        #{empQq,jdbcType=VARCHAR},
+      </if>
+      <if test="empEmail != null">
+        #{empEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="empAccount != null">
+        #{empAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="empIdcard != null">
+        #{empIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="empPhoto != null">
+        #{empPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="empAddDate != null">
+        #{empAddDate,jdbcType=DATE},
+      </if>
+      <if test="empAddPerson != null">
+        #{empAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="empJob != null">
+        #{empJob,jdbcType=BIGINT},
+      </if>
+      <if test="empBank != null">
+        #{empBank,jdbcType=VARCHAR},
+      </if>
+      <if test="empNationality != null">
+        #{empNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="empOrigin != null">
+        #{empOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="empNation != null">
+        #{empNation,jdbcType=VARCHAR},
+      </if>
+      <if test="empSchool != null">
+        #{empSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="empEducation != null">
+        #{empEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="empProfession != null">
+        #{empProfession,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.Employee">
+    update employee
+    <set>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="empName != null">
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null">
+        emp_sex = #{empSex,jdbcType=INTEGER},
+      </if>
+      <if test="empBirth != null">
+        emp_birth = #{empBirth,jdbcType=DATE},
+      </if>
+      <if test="empAddress != null">
+        emp_address = #{empAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empPost != null">
+        emp_post = #{empPost,jdbcType=VARCHAR},
+      </if>
+      <if test="empTelephone != null">
+        emp_telephone = #{empTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="empMobilephone != null">
+        emp_mobilephone = #{empMobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="empQq != null">
+        emp_qq = #{empQq,jdbcType=VARCHAR},
+      </if>
+      <if test="empEmail != null">
+        emp_email = #{empEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="empAccount != null">
+        emp_account = #{empAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="empIdcard != null">
+        emp_idcard = #{empIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="empPhoto != null">
+        emp_photo = #{empPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="empAddDate != null">
+        emp_add_date = #{empAddDate,jdbcType=DATE},
+      </if>
+      <if test="empAddPerson != null">
+        emp_add_person = #{empAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="empJob != null">
+        emp_job = #{empJob,jdbcType=BIGINT},
+      </if>
+      <if test="empBank != null">
+        emp_bank = #{empBank,jdbcType=VARCHAR},
+      </if>
+      <if test="empNationality != null">
+        emp_nationality = #{empNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="empOrigin != null">
+        emp_origin = #{empOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="empNation != null">
+        emp_nation = #{empNation,jdbcType=VARCHAR},
+      </if>
+      <if test="empSchool != null">
+        emp_school = #{empSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="empEducation != null">
+        emp_education = #{empEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="empProfession != null">
+        emp_profession = #{empProfession,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="deptId != null">
+         and dept_id = #{deptId,jdbcType=BIGINT}
+      </if>
+      <if test="empName != null and empName != ''">
+         and emp_name = #{empName,jdbcType=VARCHAR}
+      </if>
+      <if test="empSex != null">
+         and emp_sex = #{empSex,jdbcType=INTEGER}
+      </if>
+      <if test="empBirth != null">
+         and emp_birth = #{empBirth,jdbcType=DATE}
+      </if>
+      <if test="empAddress != null and empAddress != ''">
+         and emp_address = #{empAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="empPost != null and empPost != ''">
+         and emp_post = #{empPost,jdbcType=VARCHAR}
+      </if>
+      <if test="empTelephone != null and empTelephone != ''">
+         and emp_telephone = #{empTelephone,jdbcType=VARCHAR}
+      </if>
+      <if test="empMobilephone != null and empMobilephone != ''">
+         and emp_mobilephone = #{empMobilephone,jdbcType=VARCHAR}
+      </if>
+      <if test="empQq != null and empQq != ''">
+         and emp_qq = #{empQq,jdbcType=VARCHAR}
+      </if>
+      <if test="empEmail != null and empEmail != ''">
+         and emp_email = #{empEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="empAccount != null and empAccount != ''">
+         and emp_account = #{empAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="empIdcard != null and empIdcard != ''">
+         and emp_idcard = #{empIdcard,jdbcType=VARCHAR}
+      </if>
+      <if test="empPhoto != null and empPhoto != ''">
+         and emp_photo = #{empPhoto,jdbcType=VARCHAR}
+      </if>
+      <if test="empAddDate != null">
+         and emp_add_date = #{empAddDate,jdbcType=DATE}
+      </if>
+      <if test="empAddPerson != null and empAddPerson != ''">
+         and emp_add_person = #{empAddPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="empJob != null">
+         and emp_job = #{empJob,jdbcType=BIGINT}
+      </if>
+      <if test="empBank != null and empBank != ''">
+         and emp_bank = #{empBank,jdbcType=VARCHAR}
+      </if>
+      <if test="empNationality != null and empNationality != ''">
+         and emp_nationality = #{empNationality,jdbcType=VARCHAR}
+      </if>
+      <if test="empOrigin != null and empOrigin != ''">
+         and emp_origin = #{empOrigin,jdbcType=VARCHAR}
+      </if>
+      <if test="empNation != null and empNation != ''">
+         and emp_nation = #{empNation,jdbcType=VARCHAR}
+      </if>
+      <if test="empSchool != null and empSchool != ''">
+         and emp_school = #{empSchool,jdbcType=VARCHAR}
+      </if>
+      <if test="empEducation != null and empEducation != ''">
+         and emp_education = #{empEducation,jdbcType=VARCHAR}
+      </if>
+      <if test="empProfession != null and empProfession != ''">
+         and emp_profession = #{empProfession,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.Employee" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from employee
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from employee
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from employee
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from employee
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

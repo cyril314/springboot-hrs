@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.RevenueDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.Revenue">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="re_min" jdbcType="REAL" property="reMin" />
+    <result column="re_max" jdbcType="REAL" property="reMax" />
+    <result column="re_percent" jdbcType="REAL" property="rePercent" />
+    <result column="re_minus" jdbcType="REAL" property="reMinus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, re_min, re_max, re_percent, re_minus
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from revenue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from revenue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.Revenue" useGeneratedKeys="true">
+    insert into revenue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="reMin != null">
+        re_min,
+      </if>
+      <if test="reMax != null">
+        re_max,
+      </if>
+      <if test="rePercent != null">
+        re_percent,
+      </if>
+      <if test="reMinus != null">
+        re_minus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="reMin != null">
+        #{reMin,jdbcType=REAL},
+      </if>
+      <if test="reMax != null">
+        #{reMax,jdbcType=REAL},
+      </if>
+      <if test="rePercent != null">
+        #{rePercent,jdbcType=REAL},
+      </if>
+      <if test="reMinus != null">
+        #{reMinus,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.Revenue">
+    update revenue
+    <set>
+      <if test="reMin != null">
+        re_min = #{reMin,jdbcType=REAL},
+      </if>
+      <if test="reMax != null">
+        re_max = #{reMax,jdbcType=REAL},
+      </if>
+      <if test="rePercent != null">
+        re_percent = #{rePercent,jdbcType=REAL},
+      </if>
+      <if test="reMinus != null">
+        re_minus = #{reMinus,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="reMin != null">
+         and re_min = #{reMin,jdbcType=REAL}
+      </if>
+      <if test="reMax != null">
+         and re_max = #{reMax,jdbcType=REAL}
+      </if>
+      <if test="rePercent != null">
+         and re_percent = #{rePercent,jdbcType=REAL}
+      </if>
+      <if test="reMinus != null">
+         and re_minus = #{reMinus,jdbcType=REAL}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.Revenue" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from revenue
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from revenue
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from revenue
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from revenue
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

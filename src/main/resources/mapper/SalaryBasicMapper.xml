@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SalaryBasicDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SalaryBasic">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="sb_basic" jdbcType="REAL" property="sbBasic" />
+    <result column="sb_endowment" jdbcType="INTEGER" property="sbEndowment" />
+    <result column="sb_hospitalization" jdbcType="INTEGER" property="sbHospitalization" />
+    <result column="sb_unemployment" jdbcType="INTEGER" property="sbUnemployment" />
+    <result column="sb_injury" jdbcType="INTEGER" property="sbInjury" />
+    <result column="sb_maternity" jdbcType="INTEGER" property="sbMaternity" />
+    <result column="sb_housing" jdbcType="INTEGER" property="sbHousing" />
+    <result column="sb_traffic" jdbcType="REAL" property="sbTraffic" />
+    <result column="sb_eatery" jdbcType="REAL" property="sbEatery" />
+    <result column="sb_telephone" jdbcType="REAL" property="sbTelephone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emp_id, sb_basic, sb_endowment, sb_hospitalization, sb_unemployment, sb_injury, 
+    sb_maternity, sb_housing, sb_traffic, sb_eatery, sb_telephone
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salary_basic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from salary_basic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.SalaryBasic" useGeneratedKeys="true">
+    insert into salary_basic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="sbBasic != null">
+        sb_basic,
+      </if>
+      <if test="sbEndowment != null">
+        sb_endowment,
+      </if>
+      <if test="sbHospitalization != null">
+        sb_hospitalization,
+      </if>
+      <if test="sbUnemployment != null">
+        sb_unemployment,
+      </if>
+      <if test="sbInjury != null">
+        sb_injury,
+      </if>
+      <if test="sbMaternity != null">
+        sb_maternity,
+      </if>
+      <if test="sbHousing != null">
+        sb_housing,
+      </if>
+      <if test="sbTraffic != null">
+        sb_traffic,
+      </if>
+      <if test="sbEatery != null">
+        sb_eatery,
+      </if>
+      <if test="sbTelephone != null">
+        sb_telephone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="sbBasic != null">
+        #{sbBasic,jdbcType=REAL},
+      </if>
+      <if test="sbEndowment != null">
+        #{sbEndowment,jdbcType=INTEGER},
+      </if>
+      <if test="sbHospitalization != null">
+        #{sbHospitalization,jdbcType=INTEGER},
+      </if>
+      <if test="sbUnemployment != null">
+        #{sbUnemployment,jdbcType=INTEGER},
+      </if>
+      <if test="sbInjury != null">
+        #{sbInjury,jdbcType=INTEGER},
+      </if>
+      <if test="sbMaternity != null">
+        #{sbMaternity,jdbcType=INTEGER},
+      </if>
+      <if test="sbHousing != null">
+        #{sbHousing,jdbcType=INTEGER},
+      </if>
+      <if test="sbTraffic != null">
+        #{sbTraffic,jdbcType=REAL},
+      </if>
+      <if test="sbEatery != null">
+        #{sbEatery,jdbcType=REAL},
+      </if>
+      <if test="sbTelephone != null">
+        #{sbTelephone,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SalaryBasic">
+    update salary_basic
+    <set>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="sbBasic != null">
+        sb_basic = #{sbBasic,jdbcType=REAL},
+      </if>
+      <if test="sbEndowment != null">
+        sb_endowment = #{sbEndowment,jdbcType=INTEGER},
+      </if>
+      <if test="sbHospitalization != null">
+        sb_hospitalization = #{sbHospitalization,jdbcType=INTEGER},
+      </if>
+      <if test="sbUnemployment != null">
+        sb_unemployment = #{sbUnemployment,jdbcType=INTEGER},
+      </if>
+      <if test="sbInjury != null">
+        sb_injury = #{sbInjury,jdbcType=INTEGER},
+      </if>
+      <if test="sbMaternity != null">
+        sb_maternity = #{sbMaternity,jdbcType=INTEGER},
+      </if>
+      <if test="sbHousing != null">
+        sb_housing = #{sbHousing,jdbcType=INTEGER},
+      </if>
+      <if test="sbTraffic != null">
+        sb_traffic = #{sbTraffic,jdbcType=REAL},
+      </if>
+      <if test="sbEatery != null">
+        sb_eatery = #{sbEatery,jdbcType=REAL},
+      </if>
+      <if test="sbTelephone != null">
+        sb_telephone = #{sbTelephone,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="sbBasic != null">
+         and sb_basic = #{sbBasic,jdbcType=REAL}
+      </if>
+      <if test="sbEndowment != null">
+         and sb_endowment = #{sbEndowment,jdbcType=INTEGER}
+      </if>
+      <if test="sbHospitalization != null">
+         and sb_hospitalization = #{sbHospitalization,jdbcType=INTEGER}
+      </if>
+      <if test="sbUnemployment != null">
+         and sb_unemployment = #{sbUnemployment,jdbcType=INTEGER}
+      </if>
+      <if test="sbInjury != null">
+         and sb_injury = #{sbInjury,jdbcType=INTEGER}
+      </if>
+      <if test="sbMaternity != null">
+         and sb_maternity = #{sbMaternity,jdbcType=INTEGER}
+      </if>
+      <if test="sbHousing != null">
+         and sb_housing = #{sbHousing,jdbcType=INTEGER}
+      </if>
+      <if test="sbTraffic != null">
+         and sb_traffic = #{sbTraffic,jdbcType=REAL}
+      </if>
+      <if test="sbEatery != null">
+         and sb_eatery = #{sbEatery,jdbcType=REAL}
+      </if>
+      <if test="sbTelephone != null">
+         and sb_telephone = #{sbTelephone,jdbcType=REAL}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SalaryBasic" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from salary_basic
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from salary_basic
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from salary_basic
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from salary_basic
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>

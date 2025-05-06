@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.JobChangeDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.JobChange">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="emp_id" jdbcType="BIGINT" property="empId" />
+    <result column="jc_old_dept" jdbcType="BIGINT" property="jcOldDept" />
+    <result column="jc_old_job" jdbcType="BIGINT" property="jcOldJob" />
+    <result column="jc_new_dept" jdbcType="BIGINT" property="jcNewDept" />
+    <result column="jc_new_job" jdbcType="BIGINT" property="jcNewJob" />
+    <result column="jc_add_person" jdbcType="VARCHAR" property="jcAddPerson" />
+    <result column="jc_date" jdbcType="DATE" property="jcDate" />
+    <result column="jc_reason" jdbcType="VARCHAR" property="jcReason" />
+    <result column="jc_remark" jdbcType="VARCHAR" property="jcRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emp_id, jc_old_dept, jc_old_job, jc_new_dept, jc_new_job, jc_add_person, jc_date, 
+    jc_reason, jc_remark
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from job_change
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from job_change
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" keyProperty="id" parameterType="com.fit.entity.JobChange" useGeneratedKeys="true">
+    insert into job_change
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="jcOldDept != null">
+        jc_old_dept,
+      </if>
+      <if test="jcOldJob != null">
+        jc_old_job,
+      </if>
+      <if test="jcNewDept != null">
+        jc_new_dept,
+      </if>
+      <if test="jcNewJob != null">
+        jc_new_job,
+      </if>
+      <if test="jcAddPerson != null">
+        jc_add_person,
+      </if>
+      <if test="jcDate != null">
+        jc_date,
+      </if>
+      <if test="jcReason != null">
+        jc_reason,
+      </if>
+      <if test="jcRemark != null">
+        jc_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="jcOldDept != null">
+        #{jcOldDept,jdbcType=BIGINT},
+      </if>
+      <if test="jcOldJob != null">
+        #{jcOldJob,jdbcType=BIGINT},
+      </if>
+      <if test="jcNewDept != null">
+        #{jcNewDept,jdbcType=BIGINT},
+      </if>
+      <if test="jcNewJob != null">
+        #{jcNewJob,jdbcType=BIGINT},
+      </if>
+      <if test="jcAddPerson != null">
+        #{jcAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="jcDate != null">
+        #{jcDate,jdbcType=DATE},
+      </if>
+      <if test="jcReason != null">
+        #{jcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="jcRemark != null">
+        #{jcRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.JobChange">
+    update job_change
+    <set>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=BIGINT},
+      </if>
+      <if test="jcOldDept != null">
+        jc_old_dept = #{jcOldDept,jdbcType=BIGINT},
+      </if>
+      <if test="jcOldJob != null">
+        jc_old_job = #{jcOldJob,jdbcType=BIGINT},
+      </if>
+      <if test="jcNewDept != null">
+        jc_new_dept = #{jcNewDept,jdbcType=BIGINT},
+      </if>
+      <if test="jcNewJob != null">
+        jc_new_job = #{jcNewJob,jdbcType=BIGINT},
+      </if>
+      <if test="jcAddPerson != null">
+        jc_add_person = #{jcAddPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="jcDate != null">
+        jc_date = #{jcDate,jdbcType=DATE},
+      </if>
+      <if test="jcReason != null">
+        jc_reason = #{jcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="jcRemark != null">
+        jc_remark = #{jcRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="empId != null">
+         and emp_id = #{empId,jdbcType=BIGINT}
+      </if>
+      <if test="jcOldDept != null">
+         and jc_old_dept = #{jcOldDept,jdbcType=BIGINT}
+      </if>
+      <if test="jcOldJob != null">
+         and jc_old_job = #{jcOldJob,jdbcType=BIGINT}
+      </if>
+      <if test="jcNewDept != null">
+         and jc_new_dept = #{jcNewDept,jdbcType=BIGINT}
+      </if>
+      <if test="jcNewJob != null">
+         and jc_new_job = #{jcNewJob,jdbcType=BIGINT}
+      </if>
+      <if test="jcAddPerson != null and jcAddPerson != ''">
+         and jc_add_person = #{jcAddPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="jcDate != null">
+         and jc_date = #{jcDate,jdbcType=DATE}
+      </if>
+      <if test="jcReason != null and jcReason != ''">
+         and jc_reason = #{jcReason,jdbcType=VARCHAR}
+      </if>
+      <if test="jcRemark != null and jcRemark != ''">
+         and jc_remark = #{jcRemark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.JobChange" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from job_change
+    <include refid="Base_Where_List" />
+    order by id desc 
+	<if test="offset != null and limit != null">
+	limit ${offset}, ${limit}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from job_change
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from job_change
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from job_change
+     where id in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+</mapper>
